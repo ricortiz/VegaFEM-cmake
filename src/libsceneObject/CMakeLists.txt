@@ -3,13 +3,13 @@ include_directories(
 )
 
 set(SCOBJ_SRCS
-   sceneObject.cpp
-	sceneObject6DOF.cpp
-   sceneObjectDeformable.cpp
-	sceneObjectDeformable6DOF.cpp
-   sceneObjectWithRestPosition.cpp
+  sceneObject.cpp
+  sceneObject6DOF.cpp
+  sceneObjectDeformable.cpp
+  sceneObjectDeformable6DOF.cpp
+  sceneObjectWithRestPosition.cpp
 )
-if(CG_LIBS)
+if(FOUND_CG)
 	set(SCOBJS_SRCS
 		${SCOBJS_SRCS}
 		sceneObjectDeformableGPU.cpp
