@@ -1,6 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_SOURCE_DIR}/include
 )
 
 set(SM_SRCS
@@ -8,4 +7,4 @@ set(SM_SRCS
   sparseMatrixMT.cpp
 )
 
-add_library(sparseMatrix SHARED ${SM_SRCS})
+add_library(sparseMatrix ${SM_SRCS})

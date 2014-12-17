@@ -1,13 +1,12 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_SOURCE_DIR}/include
 )
 
-set(clothbw_srcs
+set(CLOTHBW_SRCS
 	clothBW.cpp
 	clothBWFromObjMesh.cpp
 	clothBWMT.cpp
 )
 
-add_library(clothbw SHARED ${clothbw_srcs})
+add_library(clothbw ${CLOTHBW_SRCS})
 target_link_libraries(clothbw minivector objMesh sparseMatrix)

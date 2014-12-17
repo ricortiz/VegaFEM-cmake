@@ -1,9 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libobjMesh
-   ${CMAKE_CURRENT_SOURCE_DIR}/../liblighting
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libminivector
-   ${CMAKE_SOURCE_DIR}/include
 )
 
 set(SCOBJ_SRCS
@@ -21,5 +17,5 @@ if(CG_LIBS)
 		)
 endif(CG_LIBS)
 
-add_library(sceneObject SHARED ${SCOBJ_SRCS})
+add_library(sceneObject ${SCOBJ_SRCS})
 target_link_libraries(sceneObject objMesh lighting minivector)

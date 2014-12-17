@@ -1,3 +1,7 @@
+include_directories(
+   ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 set(MINIVEC_SRCS
    mat3d.cpp
    vec3d.cpp
@@ -5,9 +9,4 @@ set(MINIVEC_SRCS
    eig3.cpp
 )
 
-include_directories(
-   ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_SOURCE_DIR}/include
-)
-
-add_library(minivector SHARED ${MINIVEC_SRCS})
+add_library(minivector ${MINIVEC_SRCS})

@@ -1,6 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_SOURCE_DIR}/include
 )
 
-add_library(glslPhong SHARED glslPhong.cpp)
+add_library(glslPhong glslPhong.cpp)

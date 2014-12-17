@@ -1,10 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libmatrix
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libsparseMatrix
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libminivector
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libvolumetricMesh
-   ${CMAKE_SOURCE_DIR}/include
 )
 
 set(IHFEM_SRCS
@@ -20,5 +15,5 @@ set(IHFEM_SRCS
  isotropicMaterialWithCompressionResistance.cpp
 )
 
-add_library(isotropicHyperelasticFEM SHARED ${IHFEM_SRCS})
+add_library(isotropicHyperelasticFEM ${IHFEM_SRCS})
 target_link_libraries(isotropicHyperelasticFEM minivector volumetricMesh sparseMatrix)
