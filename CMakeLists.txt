@@ -142,8 +142,6 @@ find_package(OpenGL)
 find_package(GLUT)
 #FindGLEW
 find_package(GLEW)
-#FindCg
-find_package(Cg)
 
 set(BLA_VENDOR "Intel mkl")
 #FindLAPACK
@@ -162,14 +160,12 @@ include_directories(
   )
 
 set(VEGA_CORE_LIBRARIES
-  camera
   clothBW
   configFile
   corotationalLinearFEM
   elasticForceModel
   forceModel
   getopts
-  glslPhong
   graph
   hashTable
   imageIO
@@ -177,14 +173,11 @@ set(VEGA_CORE_LIBRARIES
   integrator
   integratorSparse
   isotropicHyperelasticFEM
-  lighting
   loadList
   massSpringSystem
   matrixIO
   minivector
   objMesh
-  objMeshGPUDeformer
-  openGLHelper
   performanceCounter
   polarDecomposition
   quaternion
@@ -197,9 +190,20 @@ set(VEGA_CORE_LIBRARIES
   volumetricMesh
   )
 
-if(FOUND_CG)
+if(OPENGL_FOUND AND FOUND_CG)
+  list(APPEND VEGA_CORE_LIBRARIES
+  objMeshGPUDeformer
+  )
+endif()
 
-endif(FOUND_CG)
+if(OPENGL_FOUND AND GLUT_FOUND)
+  list(APPEND VEGA_CORE_LIBRARIES
+  glslPhong
+  openGLHelper
+  camera
+  lighting
+  )
+endif()
 
 if(LAPACK_FOUND AND BLAS_FOUND)
   list(APPEND VEGA_CORE_LIBRARIES
