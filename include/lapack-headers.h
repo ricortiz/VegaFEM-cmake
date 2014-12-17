@@ -1,4 +1,4 @@
-#if defined(WIN32) || defined(linux)
+#if defined(WIN32) || defined(linux) && (defined(BLASS) && defined(LAPACK))
   #include "mkl_cblas.h"
   #include "mkl_types.h"
   #include "mkl_lapack.h"

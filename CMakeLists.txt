@@ -48,6 +48,13 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 # shared libraries option
 option(BUILD_SHARED_LIBS "Build shared libraries." ON)
 
+#use USE_EXPOKIT
+option(USE_EXPOKIT "Use expokit." OFF)
+if(USE_EXPOKIT)
+  add_definitions(-DUSE_EXPOKIT)
+endif(USE_EXPOKIT)
+
+
 # use openmp
 option(USE_OPENMP "Build with partial OpenMP support." ON)
 if(USE_OPENMP)
@@ -181,10 +188,8 @@ set(VEGA_CORE_LIBRARIES
   lighting
   loadList
   massSpringSystem
-  matrix
   matrixIO
   minivector
-  modalMatrix
   objMesh
   objMeshGPUDeformer
   openGLHelper
@@ -207,12 +212,16 @@ if(LAPACK_FOUND AND BLAS_FOUND)
     reducedStvk
     sceneObjectReduced
     integratorDense
+    modalMatrix
+    matrix
   )
 endif(LAPACK_FOUND AND BLAS_FOUND)
 
 foreach(lib ${VEGA_CORE_LIBRARIES})
   include_directories(src/lib${lib})
 endforeach()
+
+add_subdirectory(src)
 
 # Local Variables:
 # tab-width: 8
