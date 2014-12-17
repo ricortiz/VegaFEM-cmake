@@ -65,6 +65,9 @@ if(USE_OPENMP)
   add_definitions(-DUSE_OPENMP)
 endif(USE_OPENMP)
 
+# build utilities
+option(BUILD_UTILITIES "Build utility applications." OFF)
+
 # Set directory variables
 if(NOT BIN_DIR)
   set(BIN_DIR bin)
@@ -137,11 +140,13 @@ else(NOT CMAKE_CONFIGURATION_TYPES)
 endif(NOT CMAKE_CONFIGURATION_TYPES)
 
 #FindOpenGL
-find_package(OpenGL)
-#FindGLUT
-find_package(GLUT)
-#FindGLEW
-find_package(GLEW)
+# find_package(OpenGL)
+# #FindGLUT
+# find_package(GLUT)
+# #FindGLEW
+# find_package(GLEW)
+# #FindCg
+# find_package(Cg)
 
 set(BLA_VENDOR "Intel mkl")
 #FindLAPACK
@@ -181,9 +186,7 @@ set(VEGA_CORE_LIBRARIES
   performanceCounter
   polarDecomposition
   quaternion
-  renderVolumetricMesh
   rigidBodyDynamics
-  sceneObject
   sparseMatrix
   sparseSolver
   stvk
@@ -202,6 +205,8 @@ if(OPENGL_FOUND AND GLUT_FOUND)
   openGLHelper
   camera
   lighting
+  sceneObject
+  renderVolumetricMesh
   )
 endif()
 
