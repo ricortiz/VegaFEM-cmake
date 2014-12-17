@@ -4,12 +4,12 @@ include_directories(
 
 set(MATRIX_SRCS
 	matrixProjection.cpp
-	matrixPCA.cpp
 	matrixExp.cpp
 	matrixBLAS.cpp
-	matrixLAPACK.cpp
 	matrix.cpp
+	matrixPCA.cpp
+  matrixLAPACK.cpp
 	)
 
-  add_library(matrix ${MATRIX_SRCS})
-  target_link_libraries(matrix matrixIO ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES})
+add_library(matrix ${MATRIX_SRCS})
+target_link_libraries(matrix matrixIO ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES})

@@ -13,5 +13,5 @@ set(OBJMESHBGPUDEFORMER_SRCS
 	vbo.cpp
 	)
 
-add_library(objmeshbgpudeformer ${OBJMESHBGPUDEFORMER_SRCS})
-target_link_libraries(objmeshbgpudeformer objMesh lighting)
+add_library(objMeshGPUDeformer ${OBJMESHBGPUDEFORMER_SRCS})
+target_link_libraries(objMeshGPUDeformer objMesh lighting ${CG_LIBRARY} ${CG_GL_LIBRARY})

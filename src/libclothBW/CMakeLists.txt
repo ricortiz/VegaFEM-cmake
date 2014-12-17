@@ -8,5 +8,5 @@ set(CLOTHBW_SRCS
 	clothBWMT.cpp
 )
 
-add_library(clothbw ${CLOTHBW_SRCS})
-target_link_libraries(clothbw minivector objMesh sparseMatrix)
+add_library(clothBW ${CLOTHBW_SRCS})
+target_link_libraries(clothBW minivector objMesh sparseMatrix)
