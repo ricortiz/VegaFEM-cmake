@@ -1,9 +1,8 @@
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_SOURCE_DIR}/include
 	)
 
-set(objmeshbgpudeformer_srcs
+set(OBJMESHBGPUDEFORMER_SRCS
 	objMeshGPUDeformer.cpp
 	objMeshGPUDeformer_coarseToFine.cpp
 	objMeshGPUDeformer_coarseToFine_fbo.cpp
@@ -14,5 +13,5 @@ set(objmeshbgpudeformer_srcs
 	vbo.cpp
 	)
 
-add_library(objmeshbgpudeformer SHARED ${objmeshbgpudeformer_srcs})
+add_library(objmeshbgpudeformer ${OBJMESHBGPUDEFORMER_SRCS})
 target_link_libraries(objmeshbgpudeformer objMesh lighting)

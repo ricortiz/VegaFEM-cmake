@@ -2,7 +2,7 @@
 # ***                  VegaFEM CMakeLists.txt                     ***
 # *******************************************************************
 
-# This file contains the top level CMakeLists.txt logic for the 
+# This file contains the top level CMakeLists.txt logic for the
 # Vega FEM software package.
 
 project(VEGAFEM)
@@ -45,6 +45,18 @@ set(CMAKE_INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 # directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+# shared libraries option
+option(BUILD_SHARED_LIBS "Build shared libraries." ON)
+
+# use openmp
+option(USE_OPENMP "Build with partial OpenMP support." ON)
+if(USE_OPENMP)
+  #FindOpenMP
+  find_package(OpenMP REQUIRED)
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+  add_definitions(-DUSE_OPENMP)
+endif(USE_OPENMP)
 
 # Set directory variables
 if(NOT BIN_DIR)
@@ -117,10 +129,24 @@ else(NOT CMAKE_CONFIGURATION_TYPES)
   endforeach()
 endif(NOT CMAKE_CONFIGURATION_TYPES)
 
-
+#FindOpenGL
 find_package(OpenGL)
+#FindGLUT
 find_package(GLUT)
-find_package(GLUI)
+#FindGLEW
+find_package(GLEW)
+#FindCg
+find_package(Cg)
+
+set(BLA_VENDOR "Intel mkl")
+#FindLAPACK
+find_package(LAPACK)
+#FindBLAS
+find_package(BLAS)
+#FindThreads
+find_package(Threads REQUIRED)
+#FindGLUI
+find_package(GLUI QUIET)
 
 if(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
   add_subdirectory(src/other/glui/glui-2.35/src)
@@ -133,10 +159,60 @@ endif(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
 include_directories(
   ${OPENGL_INCLUDE_DIR}
   ${GLUT_INCLUDE_DIR}
-  ${GLUI_INCLUDE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
   )
 
-add_subdirectory(src)
+set(VEGA_CORE_LIBRARIES
+  camera
+  clothBW
+  configFile
+  corotationalLinearFEM
+  elasticForceModel
+  forceModel
+  getopts
+  glslPhong
+  graph
+  hashTable
+  imageIO
+  insertRows
+  integrator
+  integratorSparse
+  isotropicHyperelasticFEM
+  lighting
+  loadList
+  massSpringSystem
+  matrix
+  matrixIO
+  minivector
+  modalMatrix
+  objMesh
+  objMeshGPUDeformer
+  openGLHelper
+  performanceCounter
+  polarDecomposition
+  quaternion
+  renderVolumetricMesh
+  rigidBodyDynamics
+  sceneObject
+  sparseMatrix
+  sparseSolver
+  stvk
+  volumetricMesh
+  )
+
+if(LAPACK_FOUND AND BLAS_FOUND)
+  list(APPEND VEGA_CORE_LIBRARIES
+    reducedElasticForceModel
+    reducedForceModel
+    reducedStvk
+    sceneObjectReduced
+    integratorDense
+  )
+endif(LAPACK_FOUND AND BLAS_FOUND)
+
+foreach(lib ${VEGA_CORE_LIBRARIES})
+  include_directories(src/lib${lib})
+endforeach()
 
 # Local Variables:
 # tab-width: 8

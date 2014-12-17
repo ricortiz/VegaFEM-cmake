@@ -1,11 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_CURRENT_SOURCE_DIR}/../libmatrixIO
-	${CMAKE_CURRENT_SOURCE_DIR}/../libimageIO
-	${CMAKE_CURRENT_SOURCE_DIR}/../libsparseMatrix
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libminivector
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libgraph
-   ${CMAKE_SOURCE_DIR}/include
 )
 
 set(OBJ_SRCS
@@ -21,10 +15,9 @@ set(OBJ_SRCS
    objMeshRender.cpp
 	octree.cpp
 	simpleSphere.cpp
-	#triangle-closestPoint.cpp
 	triangle.cpp
 	tribox3.cpp
 )
 
-add_library(objMesh SHARED ${OBJ_SRCS})
+add_library(objMesh ${OBJ_SRCS})
 target_link_libraries(objMesh minivector matrixIO imageIO sparseMatrix graph ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY})

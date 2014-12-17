@@ -1,6 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_SOURCE_DIR}/include
 )
 
-add_library(performanceCounter SHARED performanceCounter.cpp)
+add_library(performanceCounter performanceCounter.cpp)

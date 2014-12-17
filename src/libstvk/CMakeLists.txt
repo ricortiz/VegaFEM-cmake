@@ -1,9 +1,5 @@
 include_directories(
    ${CMAKE_CURRENT_SOURCE_DIR}
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libsparseMatrix
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libvolumetricMesh
-   ${CMAKE_CURRENT_SOURCE_DIR}/../libminivector
-   ${CMAKE_SOURCE_DIR}/include
 )
 
 set(STVK_SRCS
@@ -19,5 +15,5 @@ set(STVK_SRCS
  StVKTetHighMemoryABCD.cpp
 )
 
-add_library(stvk SHARED ${STVK_SRCS})
+add_library(stvk ${STVK_SRCS})
 target_link_libraries(stvk minivector volumetricMesh sparseMatrix)
