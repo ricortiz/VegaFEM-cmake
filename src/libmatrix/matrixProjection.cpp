@@ -26,7 +26,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#define CBLAS
 #ifdef CBLAS
   #include "lapack-headers.h"
 #endif
@@ -152,7 +151,7 @@ void ProjectVector(int n_inp, int r_inp, real * U_inp, real * q_inp, real * f_in
 // project sparse vector f onto basis, given by U, using the equation q = U^T f
 // matrix U is of size n x r
 // number of non-zero components of f is given by k
-// non-zero components of vector f are given by f_buffer and i_buffer, where i_buffer[j] specifies the position, 
+// non-zero components of vector f are given by f_buffer and i_buffer, where i_buffer[j] specifies the position,
 // and f_buffer[j] specifies the force component at i_buffer[j]
 template <class real>
 void ProjectSparseVector(int n, int r, real * U, real * q, real * f_buffer, int * i_buffer, int k)

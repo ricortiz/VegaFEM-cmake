@@ -24,8 +24,6 @@
 #include "matrixMacros.h"
 #include "matrixBLAS.h"
 
-#define BLAS
-
 #ifdef BLAS
   #include "matrixBLASOptimized.cpp"
 #else
@@ -35,7 +33,7 @@
 // transposes the matrix (without making a separate copy)
 template <class real>
 void InPlaceTransposeMatrix(int m, int n, real * mtx)
-{ 
+{
   real buffer;
   #define SWAP_ELT(i,j)\
     buffer = mtx[i];\
@@ -45,7 +43,7 @@ void InPlaceTransposeMatrix(int m, int n, real * mtx)
   long M = m;
   long N = n;
   long MN = M*N;
-  
+
   for(long i=0; i< MN; i++)
   {
     long current = i;
@@ -54,9 +52,9 @@ void InPlaceTransposeMatrix(int m, int n, real * mtx)
       // evaluate permutation on 'current'
       long k = current / N;
       long l = current % N;
-  
+
       current = M * l + k;
-    } 
+    }
     while(current < i);
 
     if (current>i)
