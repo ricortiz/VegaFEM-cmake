@@ -140,21 +140,35 @@ else(NOT CMAKE_CONFIGURATION_TYPES)
 endif(NOT CMAKE_CONFIGURATION_TYPES)
 
 #FindOpenGL
-# find_package(OpenGL)
-# #FindGLUT
-# find_package(GLUT)
-# #FindGLEW
-# find_package(GLEW)
-# #FindCg
-# find_package(Cg)
+find_package(OpenGL)
 
-set(BLA_VENDOR "Intel mkl")
+#FindGLUT
+find_package(GLUT)
+
+#FindGLEW
+find_package(GLEW)
+
+#FindCg
+find_package(Cg)
+
 #FindLAPACK
+set(BLA_VENDOR "Intel mkl")
 find_package(LAPACK)
+
 #FindBLAS
 find_package(BLAS)
+
 #FindThreads
-find_package(Threads REQUIRED)
+if(WIN32)
+  set(THREADS_USE_PTHREADS_WIN32 1)
+endif(WIN32)
+option(BUILD_MULTI_THREADED "Use multithreading (pthread)" ON)
+if(BUILD_MULTI_THREADED)
+  find_package(Threads REQUIRED)
+  if(THREADS_FOUND)
+    include_directories(${THREADS_PTHREADS_INCLUDE_DIR})
+  endif()
+endif()
 
 # OpenGL is used in many places in the code, so
 # just include the necessary directories here.
@@ -163,7 +177,6 @@ include_directories(
   ${GLUT_INCLUDE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/include
   )
-
 set(VEGA_CORE_LIBRARIES
   clothBW
   configFile
@@ -194,6 +207,7 @@ set(VEGA_CORE_LIBRARIES
   )
 
 if(OPENGL_FOUND AND FOUND_CG)
+  include_directories(${CG_INCLUDE_PATH})
   list(APPEND VEGA_CORE_LIBRARIES
   objMeshGPUDeformer
   )
@@ -227,10 +241,3 @@ foreach(lib ${VEGA_CORE_LIBRARIES})
 endforeach()
 
 add_subdirectory(src)
-
-# Local Variables:
-# tab-width: 8
-# mode: cmake
-# indent-tabs-mode: t
-# End:
-# ex: shiftwidth=2 tabstop=8

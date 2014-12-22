@@ -4,7 +4,9 @@ include_directories(
 	)
 
 find_package(X11)
-find_package(GLUT)
+if(NOT GLUT_FOUND)
+	message(FATAL "GLUT is required to build GLUI.")
+endif()
 
 #LIBGLUI = -L./lib -lglui
 #LIBGL   = -lGLU -lGL

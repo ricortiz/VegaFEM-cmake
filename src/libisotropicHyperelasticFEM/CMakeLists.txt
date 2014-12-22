@@ -11,9 +11,18 @@ set(IHFEM_SRCS
  homogeneousStVKIsotropicMaterial.cpp
  homogeneousNeoHookeanIsotropicMaterial.cpp
  isotropicHyperelasticFEM.cpp
- isotropicHyperelasticFEMMT.cpp
  isotropicMaterialWithCompressionResistance.cpp
 )
 
+if(BUILD_MULTI_THREADED)
+	list(APPEND IHFEM_SRCS
+ 	isotropicHyperelasticFEMMT.cpp
+	)
+endif(BUILD_MULTI_THREADED)
+
 add_library(isotropicHyperelasticFEM ${IHFEM_SRCS})
 target_link_libraries(isotropicHyperelasticFEM minivector volumetricMesh sparseMatrix)
+
+if(BUILD_MULTI_THREADED)
+	target_link_libraries(isotropicHyperelasticFEM ${CMAKE_THREAD_LIBS_INIT})
+endif(BUILD_MULTI_THREADED)

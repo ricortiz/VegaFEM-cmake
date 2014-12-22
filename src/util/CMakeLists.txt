@@ -2,11 +2,11 @@
 #FindGLUI
 find_package(GLUI QUIET)
 
-if(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
-  add_subdirectory(other/glui/glui-2.35/src)
+if(NOT GLUI_FOUND)
+  add_subdirectory(other/glui/glui-2.36/src)
   set(GLUI_LIBRARY glui)
-  set(GLUI_INCLUDE_DIR other/glui/glui-2.35/src/include)
-endif(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
+  set(GLUI_INCLUDE_DIR other/glui/glui-2.36/src/include)
+endif(NOT GLUI_FOUND)
 
 include_directories(${GLUI_INCLUDE_DIR})
 

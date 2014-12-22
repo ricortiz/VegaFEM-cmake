@@ -56,6 +56,10 @@
 
 #endif
 
+#if defined(WIN32)
+  #include <windows.h>
+#endif
+
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>

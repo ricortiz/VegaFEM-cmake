@@ -1,6 +1,3 @@
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}
-	)
 
 set(OBJMESHBGPUDEFORMER_SRCS
 	objMeshGPUDeformer.cpp

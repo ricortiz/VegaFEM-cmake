@@ -7,7 +7,6 @@ set(MSS_SRCS
  massSpringSystemFromObjMesh.cpp
  massSpringSystemFromTetMeshConfigFile.cpp
  massSpringSystemFromTetMesh.cpp
- massSpringSystemMT.cpp
  massSpringSystem.cpp
  massSpringSystemFromCubicMesh.cpp
  massSpringSystemFromCubicMeshConfigFile.cpp
@@ -17,6 +16,12 @@ if(OPENGL_FOUND AND GLUT_FOUND)
   renderSprings.cpp
   )
 endif()
+
+if(BUILD_MULTI_THREADED)
+	list(APPEND MSS_SRCS
+ 		massSpringSystemMT.cpp
+	)
+endif(BUILD_MULTI_THREADED)
 
 add_library(massSpringSystem ${MSS_SRCS})
 target_link_libraries(massSpringSystem objMesh volumetricMesh configFile sparseMatrix)
