@@ -1,8 +1,8 @@
-#if defined(WIN32) || defined(linux) && (defined(BLASS) && defined(LAPACK))
-  #include "mkl_cblas.h"
-  #include "mkl_types.h"
-  #include "mkl_lapack.h"
-  #include "mkl_blas.h"
+#if defined(WIN32) || defined(linux)
+  #include <cblas.h>
+//   #include "types.h"
+//   #include <lapack.h>
+//   #include <blas.h>
 #elif defined(__APPLE__)
   #include <Accelerate/Accelerate.h>
 #endif

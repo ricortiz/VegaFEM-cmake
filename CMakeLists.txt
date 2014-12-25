@@ -148,11 +148,24 @@ endif(NOT CMAKE_CONFIGURATION_TYPES)
 # #FindCg
 # find_package(Cg)
 
-set(BLA_VENDOR "Intel mkl")
-#FindLAPACK
-find_package(LAPACK)
-#FindBLAS
-find_package(BLAS)
+option(USE_ATLAS "Use Atlas optimized blas libraries." ON)
+
+option(USE_MKL "Use mkl libraries." OFF)
+if(USE_MKL)
+  set(BLA_VENDOR "Intel mkl")
+endif(USE_MKL)
+
+if(USE_ATLAS)
+  set(BLAS_VENDOR "ATLAS")
+  find_package(Atlas)
+else(USE_ATLAS)
+  #FindLAPACK
+  find_package(LAPACK)
+endif(USE_ATLAS)
+
+message("LAPACK_LIBRARIES = ${LAPACK_LIBRARIES}")
+message("CBLAS_LIBRARIES= ${CBLAS_LIBRARIES}")
+
 #FindThreads
 find_package(Threads REQUIRED)
 
