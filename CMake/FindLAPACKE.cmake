@@ -4,7 +4,7 @@ find_path(LAPACKE_INCLUDE_DIR
   /usr/include
   /usr/local/include
   )
-  
+
 find_path(CBLAS_INCLUDE_DIR
   cblas.h
   /usr/include
@@ -38,11 +38,12 @@ find_library(CBLAS_LIBRARY
 find_library(LAPACKE_LIBRARY
   NAMES lapacke
   PATHS
-  /usr/lib64  
+  /usr/lib64
   )
 
 set(LAPACKE_LIBRARIES "${LAPACKE_LIBRARY}")
-set(CBLAS_LIBRARIES ${CBLAS_LIBRARY} 
+set(LAPACK_LIBRARIES "${LAPACKE_LIBRARY}")
+set(CBLAS_LIBRARIES ${CBLAS_LIBRARY}
 #   ${BLAS_LIBRARY}
   )
 

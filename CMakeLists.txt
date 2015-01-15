@@ -182,11 +182,11 @@ if (VegaFEM_BUILD_MODEL_REDUCTION)
       # TODO: set option for the paradiso solvers and define PARDISO_SOLVER_IS_AVAILABLE
     else()
       find_package(LAPACKE REQUIRED) # Also searches for cblas
+      find_package(LAPACK REQUIRED)
       include_directories(${LAPACKE_INCLUDE_DIR})
       include_directories(${CBLAS_INCLUDE_DIR})
     endif()
   endif()
-  find_package(LAPACK) # Also searches for blas
 endif()
 
 if (VegaFEM_ENABLE_OpenGL_SUPPORT)
@@ -262,6 +262,9 @@ endif()
 
 add_subdirectory(src)
 export(PACKAGE VegaFEM)
+export(TARGETS ${VegaFEM_Modules}
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMTargets.cmake")
+
 write_basic_package_version_file(
   "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMConfigVersion.cmake"
   VERSION ${VegaFEM_VERSION}
@@ -272,6 +275,7 @@ configure_file(
   "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMConfig.cmake"
   COPYONLY
 )
+
 
 set(ConfigPackageLocation lib/cmake/VegaFEM)
 install(EXPORT VegaFEMTargets
