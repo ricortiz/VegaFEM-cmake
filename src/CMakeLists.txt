@@ -7,6 +7,6 @@ endforeach()
 
 set(VegaFEM_INCLUDE_DIRS ${include_dirs} CACHE INTERNAL "VegaFEM Libs includes" FORCE)
 
-if(BUILD_UTILITIES)
+if(VegaFEM_BUILD_UTILITIES)
   add_subdirectory(util)
 endif(BUILD_UTILITIES)
