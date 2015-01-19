@@ -1,0 +1,12 @@
+#-----------------------------------------------------------------------------
+#
+# VegaFEMConfig.cmake - VegaFEM CMake configuration file for external projects.
+#
+# This file is configured by VegaFEM and used by the UseVegaFEM.cmake module
+# to load settings for an external project.
+
+include("${CMAKE_CURRENT_LIST_DIR}/VegaFEMTargets.cmake")
+
+# The include file directories.
+set(VegaFEM_INCLUDE_DIRS "@VegaFEM_INCLUDE_DIRS@")
+

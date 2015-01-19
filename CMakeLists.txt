@@ -261,6 +261,9 @@ if (VegaFEM_ENABLE_OpenGL_SUPPORT)
 endif()
 
 add_subdirectory(src)
+
+list(APPEND VegaFEM_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 export(PACKAGE VegaFEM)
 export(TARGETS ${VegaFEM_Modules}
   FILE "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMTargets.cmake")
@@ -271,9 +274,9 @@ write_basic_package_version_file(
   COMPATIBILITY AnyNewerVersion
 )
 configure_file(
-  CMake/VegaFEMConfig.cmake
+  CMake/VegaFEMConfig.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMConfig.cmake"
-  COPYONLY
+  @ONLY
 )
 
 
@@ -281,7 +284,7 @@ set(ConfigPackageLocation lib/cmake/VegaFEM)
 install(EXPORT VegaFEMTargets
   FILE
     VegaFEMTargets.cmake
-    #NAMESPACE VegaFEM::
+    NAMESPACE VegaFEM::
   DESTINATION
     ${ConfigPackageLocation}
 )
