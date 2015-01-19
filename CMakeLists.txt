@@ -189,7 +189,7 @@ if (VegaFEM_BUILD_MODEL_REDUCTION)
   endif()
 endif()
 
-if (VegaFEM_ENABLE_OpenGL_SUPPORT)
+if (VegaFEM_ENABLE_OpenGL_SUPPORT AND VegaFEM_BUILD_UTILITIES)
   if(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
     add_subdirectory(thirdparty/glui/2.36/src)
     set(GLUI_LIBRARY glui)
@@ -281,7 +281,7 @@ set(ConfigPackageLocation lib/cmake/VegaFEM)
 install(EXPORT VegaFEMTargets
   FILE
     VegaFEMTargets.cmake
-    #NAMESPACE VegaFEM::
+    NAMESPACE VegaFEM::
   DESTINATION
     ${ConfigPackageLocation}
 )

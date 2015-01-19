@@ -48,7 +48,7 @@
 
 class Mat3d {
 public:
-  
+
   inline Mat3d() {}
 
   /*
@@ -60,7 +60,7 @@ public:
                double x3, double x4, double x5,
                double x6, double x7, double x8);
   inline Mat3d(double mat[9]); // "mat" must be given in row-major order
-  inline Mat3d(Vec3d rows[3]); 
+  inline Mat3d(Vec3d rows[3]);
   inline Mat3d(Vec3d row0, Vec3d row1, Vec3d row2);
   inline Mat3d(double diag); // create a diagonal matrix with all entries "diag" (can create zero matrix by passing 0.0)
 
@@ -69,7 +69,7 @@ public:
 		  double x6, double x7, double x8);
   inline void set(double value); // set all elements to value
 
-  inline Mat3d & operator=(const Mat3d & source); 
+  inline Mat3d & operator=(const Mat3d & source);
 
   inline Mat3d operator+ (const Mat3d & );
   inline Mat3d & operator+= (const Mat3d & );
@@ -147,7 +147,7 @@ inline Mat3d::Mat3d(double mat[9])
   elt[2] = Vec3d(mat[6],mat[7],mat[8]);
 }
 
-inline Mat3d::Mat3d(Vec3d rows[3]) 
+inline Mat3d::Mat3d(Vec3d rows[3])
 {
   elt[0] = rows[0];
   elt[1] = rows[1];
@@ -187,7 +187,7 @@ inline void Mat3d::set(double x0, double x1, double x2,
 
 inline void Mat3d::set(double value)
 {
-  elt[0][0] = elt[0][1] = elt[0][2] = 
+  elt[0][0] = elt[0][1] = elt[0][2] =
   elt[1][0] = elt[1][1] = elt[1][2] =
   elt[2][0] = elt[2][1] = elt[2][2] = value;
 }
@@ -302,7 +302,7 @@ inline Mat3d operator/ (double scalar, const Mat3d & mat2)
 
   return result;
 }
- 
+
 inline Mat3d tensorProduct(Vec3d & vecA, Vec3d & vecB)
 {
   Mat3d result(vecA[0]*vecB[0],vecA[0]*vecB[1],vecA[0]*vecB[2],
@@ -347,12 +347,12 @@ inline const Mat3d Mat3d::operator* (const Mat3d & mat2) const
 
 inline Mat3d inv(const Mat3d & mat)
 {
-  double invDeterminant = 1.0 / 
-    (-mat[0][2] * mat[1][1] * mat[2][0] + 
-      mat[0][1] * mat[1][2] * mat[2][0] + 
-      mat[0][2] * mat[1][0] * mat[2][1] - 
-      mat[0][0] * mat[1][2] * mat[2][1] - 
-      mat[0][1] * mat[1][0] * mat[2][2] + 
+  double invDeterminant = 1.0 /
+    (-mat[0][2] * mat[1][1] * mat[2][0] +
+      mat[0][1] * mat[1][2] * mat[2][0] +
+      mat[0][2] * mat[1][0] * mat[2][1] -
+      mat[0][0] * mat[1][2] * mat[2][1] -
+      mat[0][1] * mat[1][0] * mat[2][2] +
       mat[0][0] * mat[1][1] * mat[2][2] );
 
   return Mat3d(
@@ -368,14 +368,14 @@ inline Mat3d inv(const Mat3d & mat)
   );
 }
 
-inline double det(const Mat3d & mat) 
+inline double det(const Mat3d & mat)
 {
   return
-   (-mat[0][2] * mat[1][1] * mat[2][0] + 
-     mat[0][1] * mat[1][2] * mat[2][0] + 
-     mat[0][2] * mat[1][0] * mat[2][1] - 
-     mat[0][0] * mat[1][2] * mat[2][1] - 
-     mat[0][1] * mat[1][0] * mat[2][2] + 
+   (-mat[0][2] * mat[1][1] * mat[2][0] +
+     mat[0][1] * mat[1][2] * mat[2][0] +
+     mat[0][2] * mat[1][0] * mat[2][1] -
+     mat[0][0] * mat[1][2] * mat[2][1] -
+     mat[0][1] * mat[1][0] * mat[2][2] +
      mat[0][0] * mat[1][1] * mat[2][2] );
 }
 
@@ -402,8 +402,8 @@ inline std::ostream &operator << (std::ostream &s, const Mat3d &v)
 
   return(
     s << '[' << a00 << ' ' << a01 << ' ' << a02 << ']' << std::endl <<
-    s << '[' << a10 << ' ' << a11 << ' ' << a12 << ']' << std::endl <<
-    s << '[' << a20 << ' ' << a21 << ' ' << a22 << ']'
+    '[' << a10 << ' ' << a11 << ' ' << a12 << ']' << std::endl <<
+    '[' << a20 << ' ' << a21 << ' ' << a22 << ']'
   );
 }
 
@@ -412,7 +412,7 @@ inline void Mat3d::print()
   double a00 = elt[0][0]; double a01 = elt[0][1]; double a02 = elt[0][2];
   double a10 = elt[1][0]; double a11 = elt[1][1]; double a12 = elt[1][2];
   double a20 = elt[2][0]; double a21 = elt[2][1]; double a22 = elt[2][2];
-  
+
   printf("[%G %G %G;\n", a00, a01, a02);
   printf(" %G %G %G;\n", a10, a11, a12);
   printf(" %G %G %G]\n", a20, a21, a22);

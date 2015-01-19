@@ -26,6 +26,7 @@
  *                                                                       *
  *************************************************************************/
 
+#include <algorithm>
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
@@ -44,7 +45,7 @@ using namespace std;
 bool triBoxOverlap(double boxcenter[3], double boxhalfsize[3], double triverts[3][3])
 {
   bool overlap = true;
-  
+
   // translate so that box's center coincides with the origin
   VECTOR_SUBTRACTEQUAL3(triverts[0], boxcenter);
   VECTOR_SUBTRACTEQUAL3(triverts[1], boxcenter);
@@ -59,7 +60,7 @@ bool triBoxOverlap(double boxcenter[3], double boxhalfsize[3], double triverts[3
   double maxx = max( max(triverts[0][0], triverts[1][0]), triverts[2][0] );
   double maxy = max( max(triverts[0][1], triverts[1][1]), triverts[2][1] );
   double maxz = max( max(triverts[0][2], triverts[1][2]), triverts[2][2] );
-  
+
   if ( ( boxhalfsize[0] < minx ) || ( maxx < -boxhalfsize[0] ) || ( boxhalfsize[1] < miny ) || ( maxy < -boxhalfsize[1] ) || ( boxhalfsize[2] < minz ) || ( maxz < -boxhalfsize[2] ) )
   {
     //no overlap
@@ -80,7 +81,7 @@ bool triBoxOverlap(double boxcenter[3], double boxhalfsize[3], double triverts[3
   VECTOR_SUBTRACT3(triverts[1], triverts[0], f0);
   VECTOR_SUBTRACT3(triverts[2], triverts[1], f1);
   VECTOR_SUBTRACT3(triverts[0], triverts[2], f2);
- 
+
   double * e[3] = { e0, e1, e2 };
   double * f[3] = { f0, f1, f2 };
 
@@ -139,7 +140,7 @@ bool triBoxOverlap(double boxcenter[3], double boxhalfsize[3], double triverts[3
     }
   }
 */
-  
+
   // plane and AABB overlap test
   // 1 test
 
@@ -191,15 +192,15 @@ bool triBoxOverlap(double boxcenter[3], double boxhalfsize[3], double triverts[3
     }
   }
 */
-  
+
   if ( VECTOR_DOT_PRODUCT3(n, nearestPoint) + planeDist > 0 )
   {
     overlap = false;
     return overlap;
   }
-  
+
   overlap = ( VECTOR_DOT_PRODUCT3(n, farthestPoint) + planeDist >= 0 );
-  
+
   return overlap;
 }
 
