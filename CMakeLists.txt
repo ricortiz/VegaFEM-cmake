@@ -144,13 +144,18 @@ endif(NOT CMAKE_CONFIGURATION_TYPES)
 
 
 if (VegaFEM_ENABLE_OpenGL_SUPPORT)
-  find_package(OpenGL)
-  find_package(GLUT)
-  find_package(GLEW)
-  find_package(GLUI)
-  if (GLUT_FOUND)
+  find_package(OpenGL REQUIRED)
+  find_package(GLUT REQUIRED)
+  find_package(GLEW REQUIRED)
+
+  include_directories(${OPENGL_INCLUDE_DIR})
+  include_directories(${GLUT_INCLUDE_DIR})
+  include_directories(${GLEW_INCLUDE_DIR})
+
+  if (GLUT_FOUND AND APPLE)
     mark_as_advanced(GLUT_cocoa_LIBRARY)
   endif()
+
   if (VegaFEM_ENABLE_Cg_SUPPORT)
     find_package(Cg REQUIRED)
     mark_as_advanced(
@@ -190,7 +195,8 @@ if (VegaFEM_BUILD_MODEL_REDUCTION)
 endif()
 
 if (VegaFEM_ENABLE_OpenGL_SUPPORT AND VegaFEM_BUILD_UTILITIES)
-  if(NOT GLUI_INCLUDE_DIR OR NOT GLUI_LIBRARY)
+  find_package(GLUI)
+  if(NOT GLUI_FOUND)
     add_subdirectory(thirdparty/glui/2.36/src)
     set(GLUI_LIBRARY glui)
     set(GLUI_INCLUDE_DIR) # Empty this as library will export its own includes.
