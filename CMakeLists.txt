@@ -269,7 +269,9 @@ endif()
 add_subdirectory(src)
 export(PACKAGE VegaFEM)
 export(TARGETS ${VegaFEM_Modules}
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMTargets.cmake")
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMTargets.cmake"
+  NAMESPACE VegaFEM::
+)
 
 write_basic_package_version_file(
   "${CMAKE_CURRENT_BINARY_DIR}/VegaFEM/VegaFEMConfigVersion.cmake"
