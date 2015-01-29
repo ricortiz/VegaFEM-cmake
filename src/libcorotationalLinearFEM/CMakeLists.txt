@@ -1,9 +1,9 @@
-set(corotationallinearfem_srcs 
+set(corotationallinearfem_srcs
     corotationalLinearFEM.cpp)
-    
-set(corotationallinearfem_hdrs 
+
+set(corotationallinearfem_hdrs
     corotationalLinearFEM.h)
-    
+
 if(VegaFEM_ENABLE_PTHREADS_SUPPORT)
   list(APPEND corotationallinearfem_hdrs corotationalLinearFEMMT.h)
   list(APPEND corotationallinearfem_srcs corotationalLinearFEMMT.cpp)
@@ -23,5 +23,5 @@ target_link_libraries(corotationalLinearFEM
     sparseMatrix
   INTERFACE
     minivector
-    ${CMAKE_THREAD_LIBS_INIT}
+    Threads::Threads
 )

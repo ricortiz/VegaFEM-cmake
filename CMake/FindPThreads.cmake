@@ -5,6 +5,7 @@ find_path(PTHREAD_INCLUDE_DIR
 find_library(PTHREAD_LIBRARY
   NAMES
     pthread
+    libpthread
     )
 
 set(PTHREAD_INCLUDE_DIRS "${PTHREAD_INCLUDE_DIR}")
@@ -23,6 +24,6 @@ mark_as_advanced(
 if(PTHREAD_FOUND AND NOT TARGET Threads::Threads)
   add_library(Threads::Threads INTERFACE IMPORTED)
   set_target_properties(Threads::Threads PROPERTIES
-    IMPORTED_LOCATION "${PTHREAD_LIBRARY}"
+    INTERFACE_LINK_LIBRARIES "${PTHREAD_LIBRARY}"
     INTERFACE_INCLUDE_DIRECTORIES "${PTHREAD_INCLUDE_DIRS}")
 endif()

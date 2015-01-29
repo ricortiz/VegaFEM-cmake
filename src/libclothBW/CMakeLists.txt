@@ -26,5 +26,5 @@ target_link_libraries(clothBW
     minivector
     sparseMatrix
   INTERFACE
-    ${CMAKE_THREAD_LIBS_INIT}
+    Threads::Threads
 )
