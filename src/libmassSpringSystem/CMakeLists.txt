@@ -39,9 +39,9 @@ target_link_libraries(massSpringSystem
     volumetricMesh
     configFile
     sparseMatrix
+    Threads::Threads
   INTERFACE
     minivector
-    ${CMAKE_THREAD_LIBS_INIT}
 )
 if (VegaFEM_ENABLE_OpenGL_SUPPORT)
   target_link_libraries(massSpringSystem

@@ -25,6 +25,5 @@ target_link_libraries(clothBW
     objMesh
     minivector
     sparseMatrix
-  INTERFACE
     Threads::Threads
 )

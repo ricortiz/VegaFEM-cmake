@@ -7,4 +7,5 @@ vega_add_library(glslPhong
 target_link_libraries(glslPhong
   PUBLIC
     ${OPENGL_LIBRARIES}
+    Threads::Threads
 )

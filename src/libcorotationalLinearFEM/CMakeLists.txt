@@ -21,7 +21,7 @@ target_link_libraries(corotationalLinearFEM
     polarDecomposition
     volumetricMesh
     sparseMatrix
+    Threads::Threads
   INTERFACE
     minivector
-    Threads::Threads
 )

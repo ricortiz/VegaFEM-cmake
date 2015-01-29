@@ -39,6 +39,5 @@ target_link_libraries(isotropicHyperelasticFEM
     minivector
     volumetricMesh
     sparseMatrix
-  INTERFACE
-    ${CMAKE_THREAD_LIBS_INIT}
+    Threads::Threads
 )
