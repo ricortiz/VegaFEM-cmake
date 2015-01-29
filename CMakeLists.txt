@@ -168,13 +168,11 @@ if (VegaFEM_ENABLE_OpenGL_SUPPORT)
 endif()
 
 if(VegaFEM_ENABLE_PTHREADS_SUPPORT)
-  #FindThreads
   if(WIN32)
     set(THREADS_USE_PTHREADS_WIN32 1)
-  endif(WIN32)
-  find_package(PThreads REQUIRED)
-  if(THREADS_FOUND)
-    include_directories(${THREADS_PTHREADS_INCLUDE_DIR})
+    find_package(PThreads REQUIRED)
+  else()
+    find_package(Threads REQUIRED)
   endif()
 endif()
 
